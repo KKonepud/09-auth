@@ -1,12 +1,12 @@
 'use client';
 
-import type { NoteFormValues } from '../../types/note';
+import type { NoteFormValues, NoteTag } from '../../types/note';
 import css from './NoteForm.module.css';
 import { useId } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { createNote } from '@/lib/api';
 import { useRouter } from 'next/navigation';
+import { createNote } from '@/lib/api/clientApi';
 import { useNoteStore } from '@/lib/store/noteStore';
 
 export default function NoteForm() {
@@ -78,7 +78,7 @@ export default function NoteForm() {
           className={css.select}
           defaultValue={draft.tag}
           required
-          onChange={event => setDraft({ tag: event.target.value })}
+          onChange={event => setDraft({ tag: event.target.value as NoteTag })}
         >
           <option value="Todo">Todo</option>
           <option value="Work">Work</option>
