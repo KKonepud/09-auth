@@ -23,7 +23,7 @@ export async function proxy(request: NextRequest) {
       const response = await checkSession();
 
       const nextResponse = isAuthRoute
-        ? NextResponse.redirect(new URL('/profile', request.url))
+        ? NextResponse.redirect(new URL('/', request.url))
         : NextResponse.next();
 
       const setCookie = response.headers['set-cookie'];
@@ -51,7 +51,7 @@ export async function proxy(request: NextRequest) {
   }
 
   if (isAuthRoute && isAuthenticated) {
-    return NextResponse.redirect(new URL('/profile', request.url));
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   return NextResponse.next();
